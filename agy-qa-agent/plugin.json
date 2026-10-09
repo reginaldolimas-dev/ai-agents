@@ -1,0 +1,5 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "qa-playwright",
+  "description": "Agente global de QA para análise de requisitos, planejamento de testes e automação com Playwright."
+}

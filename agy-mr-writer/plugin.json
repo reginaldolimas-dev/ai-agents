@@ -1,0 +1,8 @@
+{
+  "name": "agy-mr-writer",
+  "version": "0.1.0",
+  "description": "Plugin global para Antigravity CLI: gera mensagens de Merge Request (git flow) a partir do diff da branch atual.",
+  "agents": ["agents/mr-writer.md"],
+  "rules": ["rules/mr-safety.md"],
+  "skills": ["skills/mr-message"]
+}

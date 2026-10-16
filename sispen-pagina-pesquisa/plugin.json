@@ -1,0 +1,5 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "sispen-pagina-pesquisa",
+  "description": "SISPEN Client: adiciona funcionalidades ao componente compartilhado PaginaPesquisaPaginada com risco zero de regressão (opt-in, desligado por padrão). Inclui regra de segurança, skills de workflow e agentes auxiliares."
+}

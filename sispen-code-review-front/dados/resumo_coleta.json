@@ -1,0 +1,16 @@
+{
+  "projeto": "desenvolvimento/sispen_client",
+  "projeto_id": 110,
+  "periodo_inicio": "2026-04-22T00:00:00Z",
+  "periodo_fim": "2026-10-22T16:16:28.232566",
+  "total_mrs": 245,
+  "mrs_por_estado": {
+    "merged": 204,
+    "closed": 39,
+    "opened": 2
+  },
+  "total_discussoes": 1594,
+  "total_notas_usuario": 385,
+  "total_notas_diff": 381,
+  "mrs_com_review_humano": 92
+}

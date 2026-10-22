@@ -1,0 +1,5 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "sispen-code-review",
+  "description": "Base de conhecimento histórica e agente de Code Review para o SISPEN Client (GitLab), gerada a partir da análise de 245 Merge Requests e 385 discussões reais da equipe. Contém regras aprovadas, catálogo de evidências, catálogo YAML estruturado, subagente de revisão e skills automatizadas."
+}

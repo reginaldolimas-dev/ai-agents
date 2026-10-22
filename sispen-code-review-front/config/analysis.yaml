@@ -1,0 +1,34 @@
+# Configurações não-secretas da análise histórica de Code Review do GitLab
+gitlab:
+  base_url: "http://gitlab.sap.ce.gov.br"
+  api_prefix: "/api/v4"
+  projeto:
+    identificador: "desenvolvimento/sispen_client"
+    id_numerico: 110
+    web_url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client"
+  auth:
+    env_var: "GITLAB_TOKEN"
+    fallback_auth: "oauth_ropc_git_credential"
+
+periodo:
+  data_referencia: "2026-10-22"
+  meses_historico: 6
+  data_inicio: "2026-04-22T00:00:00-03:00"
+  data_fim: "2026-10-22T23:59:59-03:00"
+  timezone: "America/Fortaleza"
+
+coleta:
+  estados_mr:
+    - merged
+    - closed
+    - opened
+  por_pagina: 100
+  diretorio_dados: "dados"
+  retomar_coleta: true
+  incluir_diffs: true
+  incluir_discussions: true
+
+processamento:
+  ignorar_mensagens_sistema: true
+  ignorar_comentarios_vazios: true
+  anonimizar_dados_sensiveis: true

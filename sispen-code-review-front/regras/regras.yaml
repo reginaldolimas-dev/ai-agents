@@ -1,0 +1,152 @@
+# Catálogo Estruturado de Regras de Code Review — SISPEN Client
+regras:
+  - id: SISPEN-PAG-01
+    titulo: "Obrigatoriedade de PaginaPesquisaPaginada"
+    categoria: "paginacao"
+    severidade: "bloqueadora"
+    confianca: "confirmada_doc"
+    descricao: "Toda listagem de pesquisa deve usar PaginaPesquisaPaginada com busca inicial desabilitada por padrão."
+    contexto: "Telas de pesquisa, listagens de cadastros, tabelas de entidades."
+    excecoes: "Tabelas estáticas de passos de wizard que operam apenas em memória."
+    gatilho: "componentes com <Table> ou listagem sem PaginaPesquisaPaginada"
+    evidencias:
+      - mr: 931
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/931"
+      - mr: 948
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/948"
+
+  - id: SISPEN-PAG-02
+    titulo: "Uso de Select Paginado"
+    categoria: "paginacao"
+    severidade: "media"
+    confianca: "recorrente_evidencias"
+    descricao: "Selects que consultam endpoints com grande volume de dados devem usar o componente Select Paginado em vez de carregar listas inteiras."
+    contexto: "Combos de seleção de pessoa, custodiado, movimentação."
+    excecoes: "Listas de domínio fixo com menos de 30 itens."
+    evidencias:
+      - mr: 954
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/954"
+
+  - id: SISPEN-HLP-01
+    titulo: "Uso de Predicados Centrais (@/utils/helpers)"
+    categoria: "helpers_js"
+    severidade: "alta"
+    confianca: "recorrente_evidencias"
+    descricao: "Substituir !valor, === null/undefined e comparações simples pelos utilitários isFalsy, isTruthy, isNonEmpty, isEqual, isNotEqual e isNil."
+    contexto: "Condicionais, validações e renders."
+    excecoes: "Valores estritamente tipados como booleano primitivo."
+    gatilho: "uso de !variavel para checagem de valor ou objeto"
+    exemplo_positivo: "if (isFalsy(custodiadoId)) return;"
+    exemplo_negativo: "if (!custodiadoId) return;"
+    evidencias:
+      - mr: 882
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/882"
+      - mr: 1007
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/1007"
+      - mr: 1031
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/1031"
+      - mr: 1032
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/1032"
+      - mr: 1070
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/1070"
+
+  - id: SISPEN-ERR-01
+    titulo: "Proibição de try/catch Redundante em Requisições"
+    categoria: "tratamento_erros"
+    severidade: "alta"
+    confianca: "recorrente_evidencias"
+    descricao: "Não envolver chamadas de API em try/catch se não houver lógica de recuperação específica, pois o Interceptor Axios global já notifica o usuário."
+    contexto: "Páginas, modais e custom hooks com chamadas a API.*."
+    excecoes: "Quando o catch executa rollback de estado local da tela."
+    gatilho: "try { await API... } catch (e) { alerta(e) }"
+    evidencias:
+      - mr: 828
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/828"
+      - mr: 935
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/935"
+      - mr: 954
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/954"
+      - mr: 1032
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/1032"
+
+  - id: SISPEN-VAL-01
+    titulo: "Validação Estrita de .ok em Operações Múltiplas"
+    categoria: "validacao"
+    severidade: "critica"
+    confianca: "recorrente_evidencias"
+    descricao: "Checar obrigatoriamente resposta.ok antes de abrir modais ou salvar dados compostos oriundos de Promise.all ou fetches encadeados."
+    contexto: "Cadastros com múltiplos relacionamentos, wizards."
+    excecoes: "Chamadas únicas gerenciadas por componentes com controle de erro próprio."
+    evidencias:
+      - mr: 944
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/944"
+
+  - id: SISPEN-INT-01
+    titulo: "Princípio do DTO Pronto (Formatação no Backend)"
+    categoria: "integracao_backend"
+    severidade: "media"
+    confianca: "recorrente_evidencias"
+    descricao: "Evitar converter e formatar descrições complexas no frontend se o backend puder devolver o campo pronto no DTO."
+    contexto: "Colunas de tabelas, exportações CSV/PDF, relatórios."
+    excecoes: "Formatações simples como máscaras de input."
+    evidencias:
+      - mr: 834
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/834"
+      - mr: 972
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/972"
+      - mr: 985
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/985"
+      - mr: 1070
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/1070"
+
+  - id: SISPEN-SEC-01
+    titulo: "Envelopamento Mandatório com <ComPermissao>"
+    categoria: "seguranca"
+    severidade: "alta"
+    confianca: "confirmada_doc"
+    descricao: "Ações restritas como botões de exclusão, edição e homologação devem estar protegidas pelo componente ComPermissao."
+    contexto: "Ações de tabelas, botões de formulário e menus de topo."
+    excecoes: "Ações de navegação puramente públicas para usuários autenticados."
+    evidencias:
+      - mr: 1048
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/1048"
+
+  - id: SISPEN-RCT-01
+    titulo: "Prevenção de Resets com useMemo em Inicializadores"
+    categoria: "react_performance"
+    severidade: "alta"
+    confianca: "recorrente_evidencias"
+    descricao: "Valores iniciais de formulário dependentes de estado assíncrono devem usar useMemo para evitar resets involuntários do formulário."
+    contexto: "Formulários de cadastro e edição."
+    excecoes: "Objetos estáticos imutáveis declarados fora do componente."
+    evidencias:
+      - mr: 944
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/944"
+
+  - id: SISPEN-CLN-01
+    titulo: "Purga de Código Morto e Imports Não Utilizados"
+    categoria: "limpeza"
+    severidade: "media"
+    confianca: "recorrente_evidencias"
+    descricao: "Remover blocos de código comentados e imports desnecessários antes do merge. Comentários JSDoc são permitidos."
+    contexto: "Todos os arquivos de código do repositório."
+    excecoes: "JSDocs (@param, @returns) em funções utilitárias."
+    evidencias:
+      - mr: 829
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/829"
+      - mr: 882
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/882"
+      - mr: 946
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client/-/merge_requests/946"
+
+  - id: SISPEN-RED-01
+    titulo: "Proibição Total de Redux em Código Novo"
+    categoria: "arquitetura"
+    severidade: "bloqueadora"
+    confianca: "confirmada_doc"
+    descricao: "É terminantemente proibido criar actions, reducers ou integrar novos componentes à store do Redux legado. Usar Custom Hooks + Context API."
+    contexto: "Qualquer nova feature ou refatoração no SISPEN Client."
+    excecoes: "Manutenção estrita em módulos legados existentes sem refatoração."
+    evidencias:
+      - mr: "ACORDO_DEV #10"
+        url: "http://gitlab.sap.ce.gov.br/desenvolvimento/sispen_client"

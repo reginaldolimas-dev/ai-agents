@@ -1,0 +1,16 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "agy-dublador",
+  "version": "1.0.0",
+  "description": "Plugin global do Antigravity CLI para dublagem automatizada de vídeos técnicos do YouTube para Português (pt-BR) com sincronização temporal, vocabulário técnico e TTS neural.",
+  "author": "Reginaldo",
+  "agents": ["agents/dublador.md"],
+  "rules": ["rules/dublagem-regras.md"],
+  "skills": [
+    "skills/dublar-video",
+    "skills/extrair-video-legenda",
+    "skills/traduzir-transcricao",
+    "skills/renderizar-dublagem",
+    "skills/gerenciar-termos-tecnicos"
+  ]
+}
